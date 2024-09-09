@@ -2,12 +2,16 @@
     margin: 0px .25%;
 }
 
-.form-control.col-7 {
-    width: 57.8333333333%;
+.form-control.col-6 {
+    width: 49.5%;
 }
 
 .form-control.col-2 {
     width: 16.1666666667%;
+}
+
+.input-group.col-3 {
+    width: 24.5%;
 }
 
 form .col-1 {
@@ -104,4 +108,19 @@ button {
     --bs-btn-hover-bg: #d0d;
     --bs-btn-hover-border-color: #c0c;
     --bs-btn-hover-color: #fff;
+}
+
+thead {
+    border-bottom: 2px solid #ddd;
+}
+
+.table-container {
+    min-height: 11.25rem;
+}
+
+.congrats {
+    height: 9rem;
+    font-size: 2em;
+    text-align: center;
+    opacity: 50%;
 }

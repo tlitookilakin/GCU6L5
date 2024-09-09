@@ -2,8 +2,11 @@
   <h1>{{title}}</h1>
   <hr>
   <form class="row">
-    <input type="text" placeholder="Task Name" name="task" class="form-control col-7" [(ngModel)]="taskInput.task">
-    <input type="number" placeholder="Hours" name="duration" class="form-control col-2" [(ngModel)]="taskInput.duration">
+    <input type="text" placeholder="Task Name" name="task" class="form-control col-6" [(ngModel)]="taskInput.task">
+    <div class="input-group col-3">
+      <input type="number" placeholder="Hours" name="duration" class="form-control" [(ngModel)]="taskInput.duration">
+      <span class="input-group-text">hrs</span>
+    </div>
     <select class="form-control col-2" name="priority" [(ngModel)]="taskInput.priority">
       @for (enum of enumPriority | keyvalue; track $index) {
         <option value="{{enum.key}}">{{enum.value}}</option>
@@ -12,34 +15,41 @@
     <button (click)="addTask()" type="submit" class="btn col-1">Add</button>
   </form>
   <hr>
-  <table class="table">
-    <thead>
-      <th class="small-col">&check;</th>
-      <th>Task</th>
-      <th>Time</th>
-      <th>Priority</th>
-      <th class="small-col"></th>
-    </thead>
-    @for (todo of tasks; track $index) {
-      <tr [class.complete]="todo.completed" 
-      [class.priority-high]="todo.priority === enumPriority.High" 
-      [class.priority-low]="todo.priority === enumPriority.Low">
-        <td class="small-col">
-          @if (!todo.completed) {
-            <button class="checkbutton" (click)="completeTask(todo)">Complete</button>
-          } @else {
-            <p class="checkbutton">&check;</p>
-          }
-        </td>
-        <td>{{todo.task}}</td>
-        <td>{{todo.duration | number}} hrs</td>
-        <td>{{todo.priority}}</td>
-        <td class="small-col">
-          <button (click)="removeTask($index)" class="deletebutton">&#xF659;</button>
-        </td>
-      </tr>
-    }
-  </table>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <th class="small-col">&check;</th>
+        <th>Task</th>
+        <th>Time</th>
+        <th>Priority</th>
+        <th class="small-col"></th>
+      </thead>
+      <tr style="height: 10px;"></tr>
+      @if (tasks.length > 0) {
+        @for (todo of tasks; track $index) {
+          <tr [class.complete]="todo.completed" 
+          [class.priority-high]="todo.priority === enumPriority.High" 
+          [class.priority-low]="todo.priority === enumPriority.Low">
+            <td class="small-col">
+              @if (!todo.completed) {
+                <button class="checkbutton" (click)="completeTask(todo)">Complete</button>
+              } @else {
+                <p class="checkbutton">&check;</p>
+              }
+            </td>
+            <td>{{todo.task}}</td>
+            <td>{{todo.duration | number}} hrs</td>
+            <td>{{todo.priority}}</td>
+            <td class="small-col">
+              <button (click)="removeTask($index)" class="deletebutton">&#xF659;</button>
+            </td>
+          </tr>
+        }
+      } @else {
+        <tr class="congrats"><td colspan="5">All tasks complete!</td></tr>
+      }
+    </table>
+  </div>
   <hr>
   <button (click)="removeCompleted()" class="btn">Remove Completed</button>
 </main>
