@@ -14,7 +14,7 @@ import { Priorty } from './models/taskPriority';
 })
 export class AppComponent {
   public enumPriority = Priorty;
-  title = 'Todo';
+  title = 'To-Do List';
   tasks: Todo[] = [
     {task: "Groceries", priority: Priorty.Normal, duration: .5, completed: false},
     {task: "Shave the dog", priority: Priorty.High, duration: 2, completed: true},

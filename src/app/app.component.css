@@ -51,8 +51,9 @@ p.checkbutton {
     border-radius: var(--bs-border-radius);
     padding:0px;
     font-weight: bold;
-    color: white;
-    background-color: red;
+    color: white;    
+    background-image: linear-gradient(-45deg, #f60, magenta);
+    background-size: cover;
     border: none;
     font-family: 'bootstrap-icons';
 }
@@ -71,14 +72,14 @@ form {
     margin-left: .25%;
 }
 
-.priority-high {
+.priority-low {
     background-color: #fed;
     color: #a60;
 }
 
-.priority-low {
-    background-color: #ddf;
-    color: #00f;
+.priority-high {
+    background-color: #fdf;
+    color: #f0f;
 }
 
 .complete {
@@ -94,4 +95,13 @@ form {
     right: 40px;
     top: 50%;
     border-bottom: 1px solid #999;
+}
+
+button {
+    --bs-btn-bg: #f0f;
+    --bs-btn-border-color: #e0e;
+    --bs-btn-color: #fff;
+    --bs-btn-hover-bg: #d0d;
+    --bs-btn-hover-border-color: #c0c;
+    --bs-btn-hover-color: #fff;
 }
