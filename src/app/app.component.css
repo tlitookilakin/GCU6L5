@@ -12,6 +12,7 @@
 
 .input-group.col-3 {
     width: 24.5%;
+    padding: 0px .25%;
 }
 
 form .col-1 {
@@ -155,4 +156,32 @@ thead {
 .form-control:focus {
     border-color: #f0f;
     box-shadow: 0 0 0 0.25rem #f0f4;
+}
+
+.taskname {
+    position: relative;
+}
+
+.taskname::after {
+    content: "\F4C9";
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    line-height: 0px;
+    font-family: "bootstrap-icons";
+    color: #000;
+    opacity: 0;
+    transition: opacity .25s;
+}
+
+.taskname:hover::after {
+    opacity: .25;
+}
+
+.taskname.editing::after {
+    opacity: 1;
+}
+
+.complete .taskname::after {
+    display: none;
 }

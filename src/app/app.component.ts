@@ -26,6 +26,7 @@ export class AppComponent {
   filteredTasks: Todo[] = this.tasks;
   taskInput: Todo = this.createDefaultTask();
   filter: string = '';
+  taskToReplace: Todo | null = null;
 
   removeTask(index: number) : void{
     this.tasks.splice(index, 1);
@@ -37,7 +38,16 @@ export class AppComponent {
   }
 
   addTask() : void {
-    this.tasks.push(this.taskInput);
+    let index: number = this.taskToReplace ? this.tasks.indexOf(this.taskToReplace!) : -1;
+
+    if (index >= 0) {
+      this.tasks.splice(index, 1, this.taskInput);
+    }
+    else {
+      this.tasks.push(this.taskInput);
+    }
+
+    this.taskToReplace = null;
     this.taskInput = this.createDefaultTask();
     this.updateFilter();
   }
@@ -54,5 +64,18 @@ export class AppComponent {
   updateFilter() : void {
     let lfilter = this.filter.toLowerCase();
     this.filteredTasks = this.tasks.filter(t => t.task.toLowerCase().includes(lfilter));
+  }
+
+  edit(task: Todo) : void {
+    if (task.completed) {
+      return;
+    }
+    if (this.taskToReplace === task) {
+      this.taskInput = this.createDefaultTask();
+      this.taskToReplace = null;
+    } else {
+      this.taskInput = {... task};
+      this.taskToReplace = task;
+    }
   }
 }
