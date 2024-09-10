@@ -4,6 +4,7 @@ import { DecimalPipe, KeyValuePipe } from '@angular/common';
 import { Todo } from './models/todo';
 import { FormsModule } from '@angular/forms';
 import { Priorty } from './models/taskPriority';
+import { StorageData } from './models/saveData';
 
 @Component({
   selector: 'app-root',
@@ -28,13 +29,19 @@ export class AppComponent {
   filter: string = '';
   taskToReplace: Todo | null = null;
 
+  constructor() {
+    this.loadList();
+  }
+
   removeTask(index: number) : void{
     this.tasks.splice(index, 1);
     this.updateFilter();
+    this.saveList();
   }
 
   completeTask(task: Todo) : void{
     task.completed = true;
+    this.saveList();
   }
 
   addTask() : void {
@@ -50,11 +57,13 @@ export class AppComponent {
     this.taskToReplace = null;
     this.taskInput = this.createDefaultTask();
     this.updateFilter();
+    this.saveList();
   }
 
   removeCompleted() : void {
     this.tasks = this.tasks.filter(t => !t.completed);
     this.updateFilter();
+    this.saveList();
   }
 
   createDefaultTask() : Todo {
@@ -77,5 +86,22 @@ export class AppComponent {
       this.taskInput = {... task};
       this.taskToReplace = task;
     }
+    this.saveList();
+    this.updateFilter();
+  }
+
+  loadList() : void {
+    let stored = localStorage.getItem("todo_data");
+    if (stored) {
+      let data : StorageData = JSON.parse(stored) as StorageData;
+      this.tasks = data.tasks;
+      this.taskInput = data.taskInput;
+      this.updateFilter();
+    }
+  }
+
+  saveList() : void {
+    let data : StorageData = {tasks: this.tasks, taskInput: this.taskInput};
+    localStorage.setItem("todo_data", JSON.stringify(data));
   }
 }

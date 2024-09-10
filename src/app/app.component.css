@@ -160,6 +160,7 @@ thead {
 
 .taskname {
     position: relative;
+    cursor: pointer;
 }
 
 .taskname::after {
@@ -180,6 +181,10 @@ thead {
 
 .taskname.editing::after {
     opacity: 1;
+}
+
+.complete .taskname {
+    cursor: unset;
 }
 
 .complete .taskname::after {
