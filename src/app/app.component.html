@@ -1,5 +1,10 @@
 <main class="container">
-  <h1>{{title}}</h1>
+  <header class="row">
+    <h1 class="col-9">{{title}}</h1>
+    <div class="col-3" id="searchbox" [class.has-content]="filter.length > 0">
+      <input type="text" [(ngModel)]="filter" placeholder="Search" (ngModelChange)="updateFilter()" class="form-control">
+    </div>
+  </header>
   <hr>
   <form class="row">
     <input type="text" placeholder="Task Name" name="task" class="form-control col-6" [(ngModel)]="taskInput.task">
@@ -25,8 +30,8 @@
         <th class="small-col"></th>
       </thead>
       <tr style="height: 10px;"></tr>
-      @if (tasks.length > 0) {
-        @for (todo of tasks; track $index) {
+      @if (filteredTasks.length > 0) {
+        @for (todo of filteredTasks; track $index) {
           <tr [class.complete]="todo.completed" 
           [class.priority-high]="todo.priority === enumPriority.High" 
           [class.priority-low]="todo.priority === enumPriority.Low">
@@ -46,7 +51,13 @@
           </tr>
         }
       } @else {
-        <tr class="congrats"><td colspan="5">All tasks complete!</td></tr>
+        <tr class="congrats"><td colspan="5">
+          @if (tasks.length === 0) {
+            All tasks complete!
+          } @else {
+            No matching items
+          }
+        </td></tr>
       }
     </table>
   </div>

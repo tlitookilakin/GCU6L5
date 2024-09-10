@@ -124,3 +124,35 @@ thead {
     text-align: center;
     opacity: 50%;
 }
+
+#searchbox {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#searchbox input {
+
+}
+#searchbox::after {
+    content: "\f52a";
+    position: absolute;
+    right: var(--bs-gutter-x);
+    top: 50%;
+    font-family: 'bootstrap-icons';
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #aaa;
+    line-height: 0px;
+    opacity: 1;
+    transition: opacity .25s;
+}
+
+#searchbox.has-content::after {
+    opacity: 0;
+}
+
+.form-control:focus {
+    border-color: #f0f;
+    box-shadow: 0 0 0 0.25rem #f0f4;
+}

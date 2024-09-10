@@ -23,10 +23,13 @@ export class AppComponent {
     {task: "Preorder Starfield", priority: Priorty.Low, duration: .1, completed: false},
     {task: "Do taxes", priority: Priorty.High, duration: .5, completed: false}
   ];
+  filteredTasks: Todo[] = this.tasks;
   taskInput: Todo = this.createDefaultTask();
+  filter: string = '';
 
   removeTask(index: number) : void{
     this.tasks.splice(index, 1);
+    this.updateFilter();
   }
 
   completeTask(task: Todo) : void{
@@ -36,13 +39,20 @@ export class AppComponent {
   addTask() : void {
     this.tasks.push(this.taskInput);
     this.taskInput = this.createDefaultTask();
+    this.updateFilter();
   }
 
   removeCompleted() : void {
     this.tasks = this.tasks.filter(t => !t.completed);
+    this.updateFilter();
   }
 
   createDefaultTask() : Todo {
     return {task: "", completed: false, duration: 0, priority: Priorty.Normal};
+  }
+
+  updateFilter() : void {
+    let lfilter = this.filter.toLowerCase();
+    this.filteredTasks = this.tasks.filter(t => t.task.toLowerCase().includes(lfilter));
   }
 }
