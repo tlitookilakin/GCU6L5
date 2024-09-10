@@ -61,6 +61,8 @@ p.checkbutton {
     background-size: cover;
     border: none;
     font-family: 'bootstrap-icons';
+    position: relative;
+    top: 2px;
 }
 
 main {
@@ -130,10 +132,6 @@ thead {
     display: flex;
     align-items: center;
     position: relative;
-}
-
-#searchbox input {
-
 }
 #searchbox::after {
     content: "\f52a";
